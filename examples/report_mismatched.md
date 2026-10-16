@@ -74,7 +74,7 @@
 | n_required | 5 |
 | n_missing | 0 |
 
-Label card (`src/constructcheck/label_card.example.yaml`), verbatim:
+Label card (`label_card.example.yaml`), verbatim:
 
 ```yaml
 # constructcheck label card

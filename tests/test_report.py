@@ -22,6 +22,7 @@ def test_run_all_and_report(data, expected, model, request, tmp_path):
     assert text.startswith("# constructcheck report")
     assert "| pairing_test | " + expected.upper() in text
     assert EXAMPLE.read_text().strip().splitlines()[-1] in text  # card copied verbatim
+    assert "Label card (`label_card.example.yaml`)" in text  # file name only, no directories
 
 
 def test_missing_inputs_skip(tmp_path):

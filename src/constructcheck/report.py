@@ -65,7 +65,7 @@ def _section(r: CheckResult) -> list[str]:
         lines += _table(["Metric", "Value"], r.metrics.items())
 
     if r.name == "label_card" and "raw" in r.details:
-        lines += [f"Label card (`{r.details.get('path', '')}`), verbatim:", "", "```yaml", r.details["raw"].rstrip(), "```", ""]
+        lines += [f"Label card (`{Path(r.details.get('path', '')).name}`), verbatim:", "", "```yaml", r.details["raw"].rstrip(), "```", ""]
         return lines
 
     for key, value in r.details.items():

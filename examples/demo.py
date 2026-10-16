@@ -5,7 +5,6 @@
 Writes examples/report_linked.md (should pass) and examples/report_mismatched.md (should warn).
 """
 
-import os
 from importlib.resources import files
 from pathlib import Path
 
@@ -15,8 +14,7 @@ from constructcheck import run_all, write_report
 from constructcheck.datasets import make_linked, make_mismatched
 
 OUT = Path(__file__).parent
-# The example card ships with the package; a relative path keeps the report free of local paths.
-LABEL_CARD = os.path.relpath(files("constructcheck") / "label_card.example.yaml")
+LABEL_CARD = files("constructcheck") / "label_card.example.yaml"
 
 for name, make in [("linked", make_linked), ("mismatched", make_mismatched)]:
     d = make()
