@@ -6,8 +6,7 @@ from dataclasses import dataclass, field
 from typing import Any, Literal
 
 import numpy as np
-from sklearn.base import clone
-from sklearn.model_selection import StratifiedKFold
+from sklearn.model_selection import StratifiedKFold, cross_val_predict
 
 Status = Literal["pass", "warn", "skip"]
 
@@ -25,12 +24,11 @@ class CheckResult:
             raise ValueError(f"status must be 'pass', 'warn' or 'skip', got {self.status!r}")
 
 
-def cv_accuracy(model, X, y, cv=5, random_state=0) -> float:
-    """Stratified k-fold accuracy with out-of-fold predictions pooled, fitting a fresh clone per fold."""
-    X, y = np.asarray(X), np.asarray(y)
+def cv_predict(model, X, y, cv=5, random_state=0) -> np.ndarray:
+    """Out-of-fold predictions from shuffled stratified k-fold (a fresh clone of `model` per fold)."""
     folds = StratifiedKFold(cv, shuffle=True, random_state=random_state)
-    correct = 0
-    for tr, te in folds.split(X, y):
-        pred = clone(model).fit(X[tr], y[tr]).predict(X[te])
-        correct += int((pred == y[te]).sum())
-    return correct / len(y)
+    return cross_val_predict(model, np.asarray(X), np.asarray(y), cv=folds)
+
+
+def cv_accuracy(model, X, y, cv=5, random_state=0) -> float:
+    return float(np.mean(cv_predict(model, X, y, cv, random_state) == np.asarray(y)))
