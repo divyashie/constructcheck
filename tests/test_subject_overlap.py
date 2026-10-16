@@ -1,6 +1,14 @@
 import pandas as pd
+import pytest
 
 from constructcheck import subject_overlap
+
+
+@pytest.mark.parametrize("data, expected", [("linked", "pass"), ("mismatched", "warn")])
+def test_synthetic_datasets(data, expected, request):
+    d = request.getfixturevalue(data)
+    r = subject_overlap(d["a"], d["b"], "subject_id", "label")
+    assert r.status == expected, r.summary
 
 
 def _table(ids, labels):

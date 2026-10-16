@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import pytest
 
 from constructcheck import pairing_test
 from constructcheck.pairing import shuffle_index
@@ -19,6 +20,13 @@ def test_shuffle_index_keeps_labels():
     y = np.array([0, 0, 1, 1, 1, 2])
     idx = shuffle_index(y, np.random.default_rng(0))
     assert (y[idx] == y).all() and sorted(idx) == list(range(len(y)))
+
+
+@pytest.mark.parametrize("data, expected", [("linked", "pass"), ("mismatched", "warn")])
+def test_synthetic_datasets(data, expected, model, request):
+    d = request.getfixturevalue(data)
+    r = pairing_test(d["fused"], d["a_cols"], d["b_cols"], "label", model)
+    assert r.status == expected, r.summary
 
 
 def test_linked_passes(model):

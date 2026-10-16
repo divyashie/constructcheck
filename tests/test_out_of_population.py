@@ -1,7 +1,15 @@
 import numpy as np
 import pandas as pd
+import pytest
 
 from constructcheck import out_of_population
+
+
+@pytest.mark.parametrize("data, expected", [("linked", "pass"), ("mismatched", "warn")])
+def test_synthetic_datasets(data, expected, model, request):
+    d = request.getfixturevalue(data)
+    r = out_of_population(d["fused"], d["a_cols"] + d["b_cols"], "label", "source", model)
+    assert r.status == expected, r.summary
 
 
 def _two_sites(flip_second):
