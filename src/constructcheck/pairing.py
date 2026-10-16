@@ -54,9 +54,11 @@ def pairing_test(
     details = {"shuffle": shuffle, "cv": cv, "min_drop": min_drop, "n": len(y)}
 
     if drop < min_drop:
-        effect = f"drops accuracy by only {drop:.3f}" if drop >= 0 else f"raises accuracy by {-drop:.3f}"
-        summary = (f"Breaking the A-B pairing ({shuffle} shuffle) {effect} "
-                   f"(threshold {min_drop:.3f}); the modalities may not be contributing jointly.")
+        if drop >= 0:
+            effect = f"Breaking the A-B pairing ({shuffle} shuffle) drops accuracy by only {drop:.3f}"
+        else:
+            effect = f"Accuracy rises by {-drop:.3f} when the A-B pairing is broken ({shuffle} shuffle)"
+        summary = f"{effect} (threshold {min_drop:.3f}); the modalities may not be contributing jointly."
         return CheckResult(name, "warn", summary, metrics, details)
     summary = f"Breaking the A-B pairing ({shuffle} shuffle) drops accuracy by {drop:.3f}; pairing carries signal."
     return CheckResult(name, "pass", summary, metrics, details)

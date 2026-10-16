@@ -3,7 +3,7 @@
 [![tests](https://github.com/divyashie/constructcheck/actions/workflows/tests.yml/badge.svg)](https://github.com/divyashie/constructcheck/actions/workflows/tests.yml)
 
 Flag construct mismatch in multimodal health ML datasets before publication.
-Companion to the JMIR preprint on construct validity in multimodal mental-health ML.
+Companion to a paper on construct validity in multimodal mental-health ML, currently under review at JMIR.
 
 A model can score well on a "multimodal" dataset whose modalities never described the same
 people, or whose labels mean different things in each source. `constructcheck` runs four quick
@@ -21,8 +21,9 @@ checks with any scikit-learn estimator and writes one Markdown report.
 This package grew out of a documented failure. A multimodal bipolar-disorder classifier reached
 82.6% macro-F1 and passed the usual validation checks, yet its modalities had zero subject overlap
 and shuffling the cross-modal pairing dropped performance by only 5.3%: the "fusion" paired
-strangers who happened to share a label. The full case is in the
-[JMIR preprint](PREPRINT_URL). These checks are the ones that would have caught it.
+strangers who happened to share a label. The full case is described in a paper under review at
+JMIR (submitted October 2026); a link will be added once it is available. These checks are the
+ones that would have caught it.
 
 ## What it looks like
 

@@ -43,3 +43,12 @@ def test_unlinked_warns(model):
 def test_warn_summary_states_unsigned_drop(model, mismatched):
     r = pairing_test(mismatched["fused"], mismatched["a_cols"], mismatched["b_cols"], "label", model)
     assert f"drops accuracy by only {r.metrics['drop']:.3f}" in r.summary
+
+
+def test_warn_summary_when_shuffling_raises_accuracy(model, monkeypatch):
+    # Paired fit first, then shuffled, then A-only and B-only.
+    accs = iter([0.70, 0.712, 0.6, 0.6])
+    monkeypatch.setattr("constructcheck.pairing.cv_accuracy", lambda *a: next(accs))
+    r = pairing_test(_paired(False), ["a0"], ["b0"], "y", model)
+    assert r.status == "warn"
+    assert r.summary.startswith("Accuracy rises by 0.012 when the A-B pairing is broken"), r.summary
