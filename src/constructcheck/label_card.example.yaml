@@ -1,0 +1,22 @@
+# constructcheck label card
+# One card per label column. Every field below is required; fill each in plainly.
+# If two modalities were labelled differently, write one card per modality.
+
+annotator: >-
+  Two board-certified psychiatrists, blind to the wearable data;
+  disagreements resolved by a third rater.
+method: >-
+  Structured clinical interview at enrolment; label = current mood episode
+  (euthymia / depression / mania) on the interview date.
+instrument: SCID-5-RV, with YMRS and MADRS severity scores
+population: >-
+  Adult outpatients (18-65) with a DSM-5 bipolar I/II diagnosis,
+  recruited from two university clinics.
+date_collected: 2024-03 to 2025-01
+
+# Optional, but useful for reviewers
+label_values:
+  0: euthymia
+  1: depression
+  2: mania
+notes: Label refers to the episode at interview, not to each sensor window.
