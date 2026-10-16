@@ -1,0 +1,25 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "constructcheck"
+version = "0.1.0"
+description = "Flag construct mismatch in multimodal health ML datasets before publication."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = [{ name = "Divya Soopal" }]
+dependencies = ["numpy", "pandas", "scikit-learn", "pyyaml"]
+
+[project.optional-dependencies]
+test = ["pytest"]
+
+[project.urls]
+Homepage = "https://github.com/divyashie/constructcheck"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/constructcheck"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
