@@ -38,3 +38,8 @@ def test_unlinked_warns(model):
     r = pairing_test(_paired(False), ["a0"], ["b0"], "y", model)
     assert r.status == "warn", r.summary
     assert set(r.metrics) >= {"paired_acc", "shuffled_acc", "modality_a_only_acc", "modality_b_only_acc"}
+
+
+def test_warn_summary_states_unsigned_drop(model, mismatched):
+    r = pairing_test(mismatched["fused"], mismatched["a_cols"], mismatched["b_cols"], "label", model)
+    assert f"drops accuracy by only {r.metrics['drop']:.3f}" in r.summary

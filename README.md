@@ -32,7 +32,7 @@ checks warn ([full report](examples/report_mismatched.md)):
 
 | Check | Status | Summary |
 |---|---|---|
-| pairing_test | WARN | Breaking the A-B pairing (within_class shuffle) changes accuracy by only +0.01 (threshold 0.10); the modalities may not be contributing jointly. |
+| pairing_test | WARN | Breaking the A-B pairing (within_class shuffle) drops accuracy by only 0.008 (threshold 0.100); the modalities may not be contributing jointly. |
 | subject_overlap | WARN | Possible construct mismatch: the two tables share no subject IDs. |
 | out_of_population | WARN | Accuracy drops by 0.40 when group 'site_2' is held out (threshold 0.10). |
 | label_card | PASS | Label card has all required provenance fields. |

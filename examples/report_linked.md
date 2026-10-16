@@ -2,14 +2,14 @@
 
 | Check | Status | Summary |
 |---|---|---|
-| pairing_test | PASS | Breaking the A-B pairing (within_class shuffle) drops accuracy by 0.24; pairing carries signal. |
+| pairing_test | PASS | Breaking the A-B pairing (within_class shuffle) drops accuracy by 0.242; pairing carries signal. |
 | subject_overlap | PASS | 500 shared subjects (100% of all IDs) with consistent label definitions. |
 | out_of_population | PASS | Held-out-group accuracy stays within 0.10 of within-population accuracy for all 2 groups. |
 | label_card | PASS | Label card has all required provenance fields. |
 
 ## pairing_test
 
-**Status: PASS**. Breaking the A-B pairing (within_class shuffle) drops accuracy by 0.24; pairing carries signal.
+**Status: PASS**. Breaking the A-B pairing (within_class shuffle) drops accuracy by 0.242; pairing carries signal.
 
 | Metric | Value |
 |---|---|
